@@ -13,7 +13,7 @@ app.get('/screenshot', async (req, res) => {
 
   let browser;
   try {
-    browser = await puppeteer.launch({ headless: true });
+        browser = await puppeteer.launch({ headless: true ,args: ['--no-sandbox', '--disable-setuid-sandbox']});
     const page = await browser.newPage();
     await page.setViewport({width: 1980, height: 1024});
     await page.goto(url, { waitUntil: 'networkidle0' });
