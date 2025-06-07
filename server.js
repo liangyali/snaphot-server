@@ -9,6 +9,9 @@ const FormData = require('form-data');
 
 const port = 3000;
 
+const browser = await puppeteer.launch({ headless: true ,args: ['--no-sandbox', '--disable-setuid-sandbox']});
+
+
 app.get('/screenshot', async (req, res) => {
   const { url, selector, app_id, app_secret } = req.query;
 
@@ -16,9 +19,9 @@ app.get('/screenshot', async (req, res) => {
     return res.status(400).json({ error: 'Missing ?url= parameter' });
   }
 
-  let browser;
+  // let browser;
   try {
-    browser = await puppeteer.launch({ headless: true ,args: ['--no-sandbox', '--disable-setuid-sandbox']});
+    // browser = await puppeteer.launch({ headless: true ,args: ['--no-sandbox', '--disable-setuid-sandbox']});
     const page = await browser.newPage();
     await page.setViewport({width: 800,height:2000});
     const r_url = decodeURIComponent(url)
